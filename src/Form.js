@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import * as yup from "yup";
 import axios from "axios";
+import Teams from "./Teams";
 
 const Form = () => {
     const [formData, setFormData] = useState({
@@ -14,6 +15,7 @@ const Form = () => {
         name: "",
         email: "",
         password: "",
+        teams: "",
         terms: ""
     })
 
@@ -25,6 +27,7 @@ const Form = () => {
         name: yup.string().required("Name is required.") ,
         email: yup.string().email("Please submit a valid email.").required("Email is required."),
         password: yup.string().min(8, "Password must be at least 8 characters!").max(16, "Password must be less than 16 characters!").required("Please create a password."),
+        teams: yup.string().oneOf(Teams, "Please select your favorite team."),
         terms: yup.boolean().oneOf([true], "Please agree to the Terms and Conditions.")
     })
 
@@ -98,6 +101,16 @@ const Form = () => {
                     Password: 
                     <input type="password" id="password" name="password" value={formData.password} onChange={handleChange} />
                     {errors.password.length > 0 ? <p className="errors">{errors.password}</p> : null}
+                </label>
+                <label htmlFor="teams">
+                    Favorite Team: 
+                    <select id="teams" name="teams" onChange={handleChange} >
+                        <option>--Please select your favorite team--</option>
+                        {Teams.map((team) => {
+                            return <option value={team} >{team}</option>
+                        })}
+                    </select>
+                    {errors.teams.length > 0 ? <p className="errors">{errors.teams}</p> : null}
                 </label>
                 <label htmlFor="terms">
                     Terms and Conditions: 
