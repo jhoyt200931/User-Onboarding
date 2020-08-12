@@ -8,6 +8,7 @@ const Form = () => {
         name: "",
         email: "",
         password: "",
+        teams: "",
         terms: true
     })
 
@@ -69,6 +70,7 @@ const Form = () => {
                 name: "",
                 email: "",
                 password: "",
+                teams: "",
                 terms: true
             })
         })
