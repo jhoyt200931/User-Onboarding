@@ -2,6 +2,45 @@ import React, { useState, useEffect } from "react";
 import * as yup from "yup";
 import axios from "axios";
 import Teams from "./Teams";
+import styled from "styled-components";
+
+const Main = styled.div`
+display: flex;
+flex-direction: column;
+`;
+
+const FormStyle = styled.form`
+display: flex;
+flex-direction: column;
+margin-left: 18%;
+`;
+
+const Title = styled.h3`
+font-size: 2.5em;
+margin-left: 18%;
+`;
+
+const Label = styled.label`
+font-size: 1.5em;
+font-weight: bold;
+text-decoration: underline;
+margin-bottom: 12px;
+margin-top: 12px;
+`;
+
+const Input = styled.input`
+margin-left: 2%;
+`;
+
+const Select = styled.select`
+margin-left: 2%;
+`;
+
+const Button = styled.button`
+width: 30%;
+height: 50px;
+border-radius: 40%;
+`;
 
 const Form = () => {
     const [formData, setFormData] = useState({
@@ -86,43 +125,43 @@ const Form = () => {
     }, [formData])
 
     return (
-        <div>
-            <h3>Fantasy Basketball Account Creation</h3>
-            <form onSubmit={submit} >
-                <label htmlFor="name">
+        <Main>
+            <Title>Fantasy Basketball Account Creation</Title>
+            <FormStyle onSubmit={submit} >
+                <Label htmlFor="name">
                     Name: 
-                    <input type="text" id="name" name="name" value={formData.name} onChange={handleChange} />
+                    <Input type="text" id="name" name="name" value={formData.name} onChange={handleChange} />
                     {errors.name.length > 0 ? <p className="errors">{errors.name}</p> : null}
-                </label>
-                <label htmlFor="email">
+                </Label>
+                <Label htmlFor="email">
                     Email: 
-                    <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} />
+                    <Input type="email" id="email" name="email" value={formData.email} onChange={handleChange} />
                     {errors.email.length > 0 ? <p className="errors">{errors.email}</p> : null}
-                </label>
-                <label htmlFor="password">
+                </Label>
+                <Label htmlFor="password">
                     Password: 
-                    <input type="password" id="password" name="password" value={formData.password} onChange={handleChange} />
+                    <Input type="password" id="password" name="password" value={formData.password} onChange={handleChange} />
                     {errors.password.length > 0 ? <p className="errors">{errors.password}</p> : null}
-                </label>
-                <label htmlFor="teams">
+                </Label>
+                <Label htmlFor="teams">
                     Favorite Team: 
-                    <select id="teams" name="teams" onChange={handleChange} >
+                    <Select id="teams" name="teams" onChange={handleChange} >
                         <option>--Please select your favorite team--</option>
                         {Teams.map((team) => {
                             return <option value={team} >{team}</option>
                         })}
-                    </select>
+                    </Select>
                     {errors.teams.length > 0 ? <p className="errors">{errors.teams}</p> : null}
-                </label>
-                <label htmlFor="terms">
+                </Label>
+                <Label htmlFor="terms">
                     Terms and Conditions: 
-                    <input type="checkbox" id="terms" name="terms" checked={formData.terms} onChange={handleChange} />
+                    <Input type="checkbox" id="terms" name="terms" checked={formData.terms} onChange={handleChange} />
                     {errors.terms.length > 0 ? <p className="errors">{errors.terms}</p> : null}
-                </label>
-                <button type="submit" disabled={buttonDisabled} >Create Account</button>
+                </Label>
+                <Button type="submit" disabled={buttonDisabled} >Create Account</Button>
                 <pre>{JSON.stringify(account, null, 2)}</pre>
-            </form>
-        </div>
+            </FormStyle>
+        </Main>
     )
 }
 
