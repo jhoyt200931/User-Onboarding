@@ -42,6 +42,12 @@ height: 50px;
 border-radius: 40%;
 `;
 
+const Error = styled.p`
+font-size: 1.5em;
+font-weight: bold;
+color: red;
+`;
+
 const Form = () => {
     const [formData, setFormData] = useState({
         name: "",
@@ -131,17 +137,17 @@ const Form = () => {
                 <Label htmlFor="name">
                     Name: 
                     <Input type="text" id="name" name="name" value={formData.name} onChange={handleChange} />
-                    {errors.name.length > 0 ? <p className="errors">{errors.name}</p> : null}
+                    {errors.name.length > 0 ? <Error className="errors">{errors.name}</Error> : null}
                 </Label>
                 <Label htmlFor="email">
                     Email: 
                     <Input type="email" id="email" name="email" value={formData.email} onChange={handleChange} />
-                    {errors.email.length > 0 ? <p className="errors">{errors.email}</p> : null}
+                    {errors.email.length > 0 ? <Error className="errors">{errors.email}</Error> : null}
                 </Label>
                 <Label htmlFor="password">
                     Password: 
                     <Input type="password" id="password" name="password" value={formData.password} onChange={handleChange} />
-                    {errors.password.length > 0 ? <p className="errors">{errors.password}</p> : null}
+                    {errors.password.length > 0 ? <Error className="errors">{errors.password}</Error> : null}
                 </Label>
                 <Label htmlFor="teams">
                     Favorite Team: 
@@ -151,12 +157,12 @@ const Form = () => {
                             return <option value={team} >{team}</option>
                         })}
                     </Select>
-                    {errors.teams.length > 0 ? <p className="errors">{errors.teams}</p> : null}
+                    {errors.teams.length > 0 ? <Error className="errors">{errors.teams}</Error> : null}
                 </Label>
                 <Label htmlFor="terms">
                     Terms and Conditions: 
                     <Input type="checkbox" id="terms" name="terms" checked={formData.terms} onChange={handleChange} />
-                    {errors.terms.length > 0 ? <p className="errors">{errors.terms}</p> : null}
+                    {errors.terms.length > 0 ? <Error className="errors">{errors.terms}</Error> : null}
                 </Label>
                 <Button type="submit" disabled={buttonDisabled} >Create Account</Button>
                 <pre>{JSON.stringify(account, null, 2)}</pre>
